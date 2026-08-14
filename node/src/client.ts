@@ -5,7 +5,7 @@ import { ClientOptions } from './types/index';
 const PRODUCTION_URL = 'https://api.respatch.com';
 const SANDBOX_URL = 'https://sandbox-api.respatch.com';
 
-export class TransmitClient {
+export class RespatchClient {
   private httpClient: AxiosInstance;
 
   constructor(options: ClientOptions) {
@@ -27,7 +27,7 @@ export class TransmitClient {
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'User-Agent': 'Respatch-Node-SDK/1.0.0',
+        'User-Agent': 'Respatch-Node-SDK/1.1.0',
       },
       timeout: 30000,
     });
@@ -71,3 +71,6 @@ export class TransmitClient {
 }
 
 export { PRODUCTION_URL as RESPATCH_PRODUCTION_URL, SANDBOX_URL as RESPATCH_SANDBOX_URL };
+
+/** @deprecated Use `RespatchClient` */
+export { RespatchClient as TransmitClient };

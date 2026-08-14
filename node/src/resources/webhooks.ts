@@ -1,10 +1,10 @@
-import { TransmitClient } from '../client';
+import { RespatchClient } from '../client';
 import { CreateWebhookRequest } from '../types';
 
 export class Webhooks {
-  private client: TransmitClient;
+  private client: RespatchClient;
 
-  constructor(client: TransmitClient) {
+  constructor(client: RespatchClient) {
     this.client = client;
   }
 

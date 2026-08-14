@@ -1,11 +1,11 @@
-import { TransmitClient } from '../client';
+import { RespatchClient } from '../client';
 import { unwrapList, unwrapPaginated } from '../response';
 import { CreateApiKeyRequest } from '../types';
 
 export class ApiKeys {
-  private client: TransmitClient;
+  private client: RespatchClient;
 
-  constructor(client: TransmitClient) {
+  constructor(client: RespatchClient) {
     this.client = client;
   }
 

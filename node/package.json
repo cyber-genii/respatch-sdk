@@ -1,6 +1,6 @@
 {
-    "name": "@transmit/node-sdk",
-    "version": "1.0.0",
+    "name": "@respatch/node-sdk",
+    "version": "1.1.0",
     "description": "Official Node.js/TypeScript SDK for the Respatch logistics and delivery API",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -9,6 +9,7 @@
         "test": "mocha -r ts-node/register tests/**/*.test.ts"
     },
     "keywords": [
+        "respatch",
         "transmit",
         "api",
         "sdk",
@@ -17,6 +18,12 @@
     ],
     "author": "Respatch",
     "license": "MIT",
+    "homepage": "https://respatch.com",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/respatch/transmit-sdks.git",
+        "directory": "node"
+    },
     "dependencies": {
         "axios": "^1.6.0"
     },

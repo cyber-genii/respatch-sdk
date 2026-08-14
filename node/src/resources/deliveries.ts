@@ -1,4 +1,4 @@
-import { TransmitClient } from '../client';
+import { RespatchClient } from '../client';
 import { unwrapList } from '../response';
 import {
   CalculateOrderFareRequest,
@@ -10,9 +10,9 @@ import {
  * @deprecated Use `Orders` (`client.orders`) — `/api/v1/api-deliveries` returns a Deprecation header.
  */
 export class Deliveries {
-  private client: TransmitClient;
+  private client: RespatchClient;
 
-  constructor(client: TransmitClient) {
+  constructor(client: RespatchClient) {
     this.client = client;
   }
 

@@ -1,4 +1,4 @@
-import { TransmitClient } from '../client';
+import { RespatchClient } from '../client';
 import { unwrapList } from '../response';
 import {
   BookFromQuoteParams,
@@ -10,9 +10,9 @@ import {
 } from '../types/deliveryOrders';
 
 export class Orders {
-  private client: TransmitClient;
+  private client: RespatchClient;
 
-  constructor(client: TransmitClient) {
+  constructor(client: RespatchClient) {
     this.client = client;
   }
 

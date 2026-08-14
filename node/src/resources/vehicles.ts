@@ -1,9 +1,9 @@
-import { TransmitClient } from '../client';
+import { RespatchClient } from '../client';
 
 export class Vehicles {
-  private client: TransmitClient;
+  private client: RespatchClient;
 
-  constructor(client: TransmitClient) {
+  constructor(client: RespatchClient) {
     this.client = client;
   }
 

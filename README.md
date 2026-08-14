@@ -6,10 +6,12 @@ Official client libraries for the [Respatch](https://respatch.com) logistics API
 
 | SDK | Path | Install |
 |-----|------|---------|
-| Node.js / TypeScript | `node/` | `npm install @transmit/node-sdk` (local; `@respatch/node-sdk` alias planned) |
-| Python | `python/` | `pip install -e python/` |
-| Go | `go/` | `go get github.com/transmit/transmit-go-sdk` |
-| Rust | `rust/` | `cargo add transmit-rust-sdk --path rust/` |
+| Node.js / TypeScript | `node/` | `npm install @respatch/node-sdk` |
+| Python | `python/` | `pip install -e python/` (package `respatch`) |
+| Go | `go/` | `go get github.com/transmit/transmit-go-sdk` (module path legacy; API is Respatch) |
+| Rust | `rust/` | `cargo add respatch-rust-sdk --path rust/` |
+
+> **Node rename:** `@transmit/node-sdk` is replaced by **`@respatch/node-sdk`**. The `Respatch` class and webhook helpers are unchanged; `Transmit` / `TransmitClient` remain deprecated aliases.
 
 ## Authentication
 
@@ -31,7 +33,7 @@ All SDK HTTP clients unwrap `.data` automatically.
 ## Quick start (Node)
 
 ```typescript
-import { Respatch } from '@transmit/node-sdk';
+import { Respatch } from '@respatch/node-sdk';
 
 const respatch = new Respatch({ apiKey: process.env.RESPATCH_API_KEY! });
 
@@ -79,12 +81,13 @@ Webhook payloads for delivery status events include `package_id` for per-package
 
 **Node**
 ```typescript
-import { verifyWebhookSignature, getWebhookSignatureHeader } from '@transmit/node-sdk';
+import { verifyWebhookSignature, getWebhookSignatureHeader } from '@respatch/node-sdk';
 ```
 
 **Python**
 ```python
-from transmit import verify_webhook_signature, get_webhook_signature_header
+from respatch import verify_webhook_signature, get_webhook_signature_header
+# legacy: from transmit import ...
 ```
 
 **Go**
@@ -95,5 +98,5 @@ ok := transmit.VerifyWebhookSignature(body, sigHeader, secret)
 
 **Rust**
 ```rust
-use transmit_rust_sdk::verify_webhook_signature;
+use respatch_rust_sdk::verify_webhook_signature;
 ```

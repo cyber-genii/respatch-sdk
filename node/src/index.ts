@@ -1,4 +1,4 @@
-import { TransmitClient } from './client';
+import { RespatchClient } from './client';
 import { ApiKeys } from './resources/apiKeys';
 import { Deliveries } from './resources/deliveries';
 import { Orders } from './resources/orders';
@@ -15,10 +15,10 @@ export class Respatch {
   public webhooks: Webhooks;
   public sandbox: Sandbox;
   public vehicles: Vehicles;
-  private client: TransmitClient;
+  private client: RespatchClient;
 
   constructor(options: ClientOptions) {
-    this.client = new TransmitClient(options);
+    this.client = new RespatchClient(options);
     this.orders = new Orders(this.client);
     this.deliveries = new Deliveries(this.client);
     this.apiKeys = new ApiKeys(this.client);
@@ -38,4 +38,9 @@ export {
   getWebhookSignatureHeader,
   RESPATCH_SIGNATURE_HEADER,
 } from './webhook';
-export { RESPATCH_PRODUCTION_URL, RESPATCH_SANDBOX_URL } from './client';
+export {
+  RespatchClient,
+  TransmitClient,
+  RESPATCH_PRODUCTION_URL,
+  RESPATCH_SANDBOX_URL,
+} from './client';
