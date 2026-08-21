@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { unwrapData } from './response';
 import { ClientOptions } from './types/index';
 
+/** Public frontiers only — never the private platform (Koyeb) backend. */
 const PRODUCTION_URL = 'https://api.respatch.com';
 const SANDBOX_URL = 'https://sandbox-api.respatch.com';
 

@@ -35,7 +35,10 @@ All SDK HTTP clients unwrap `.data` automatically.
 ```typescript
 import { Respatch } from '@respatch/node-sdk';
 
-const respatch = new Respatch({ apiKey: process.env.RESPATCH_API_KEY! });
+const respatch = new Respatch({
+  apiKey: process.env.RESPATCH_API_KEY!,
+  environment: 'sandbox', // sandbox-api.respatch.com — use 'production' for api.respatch.com
+});
 
 // Step 1: lock pricing
 const quote = await respatch.orders.quote({
@@ -62,12 +65,12 @@ console.log(order.tracking_url, order.fare.breakdown);
 
 ## Base URLs
 
-| Environment | URL |
-|-------------|-----|
-| Production | `https://api.respatch.com` |
-| Sandbox | `https://sandbox-api.respatch.com` |
+| Frontier | Host | SDK `environment` |
+|----------|------|-------------------|
+| Production (`respatch-api`) | `https://api.respatch.com` | `production` (default) |
+| Sandbox (`respatch-sandbox`) | `https://sandbox-api.respatch.com` | `sandbox` |
 
-Override with `baseUrl` / `base_url` in client options. The live docs explorer may use a staging host via `NEXT_PUBLIC_API_URL`.
+Override with `baseUrl` / `base_url` in client options. Do **not** point SDKs at the private platform backend — only `api.respatch.com` (respatch-api) and `sandbox-api.respatch.com` (respatch-sandbox).
 
 ## Canonical endpoints
 

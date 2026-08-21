@@ -5,8 +5,8 @@ import requests
 
 from .response import unwrap_data
 
-PRODUCTION_URL = "https://api.respatch.com"
-SANDBOX_URL = "https://sandbox-api.respatch.com"
+PRODUCTION_URL = "https://api.respatch.com"  # respatch-api frontier
+SANDBOX_URL = "https://sandbox-api.respatch.com"  # respatch-sandbox frontier
 
 
 class RespatchAPIError(Exception):

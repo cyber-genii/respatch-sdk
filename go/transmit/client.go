@@ -36,6 +36,7 @@ func NewClient(options Options) (*Client, error) {
 
 	baseURL := options.BaseURL
 	if baseURL == "" {
+		// Public frontiers only (respatch-sandbox / respatch-api), not the platform backend.
 		if options.Environment == "sandbox" {
 			baseURL = "https://sandbox-api.respatch.com"
 		} else {

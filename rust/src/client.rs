@@ -59,8 +59,10 @@ impl Client {
         let base_url = if let Some(custom_url) = base_url_override {
             custom_url.to_string()
         } else if environment == Some("sandbox") {
+            // respatch-sandbox frontier
             "https://sandbox-api.respatch.com".to_string()
         } else {
+            // respatch-api frontier
             "https://api.respatch.com".to_string()
         };
 
