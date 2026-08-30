@@ -8,10 +8,12 @@ Official client libraries for the [Respatch](https://respatch.com) logistics API
 |-----|------|---------|
 | Node.js / TypeScript | `node/` | `npm install @respatch/node-sdk` |
 | Python | `python/` | `pip install -e python/` (package `respatch`) |
-| Go | `go/` | `go get github.com/transmit/transmit-go-sdk` (module path legacy; API is Respatch) |
+| Go | `go/` | `go get github.com/respatch/respatch-go-sdk` |
 | Rust | `rust/` | `cargo add respatch-rust-sdk --path rust/` |
 
 > **Node rename:** `@transmit/node-sdk` is replaced by **`@respatch/node-sdk`**. The `Respatch` class and webhook helpers are unchanged; `Transmit` / `TransmitClient` remain deprecated aliases.
+>
+> **Go rename:** the module is now `github.com/respatch/respatch-go-sdk` and the package is `respatch`. The old `transmit` package remains as a deprecated shim of type aliases, so both packages' values are interchangeable while you migrate.
 
 ## Authentication
 
@@ -95,8 +97,8 @@ from respatch import verify_webhook_signature, get_webhook_signature_header
 
 **Go**
 ```go
-import "github.com/transmit/transmit-go-sdk/transmit"
-ok := transmit.VerifyWebhookSignature(body, sigHeader, secret)
+import "github.com/respatch/respatch-go-sdk/respatch"
+ok := respatch.VerifyWebhookSignature(body, sigHeader, secret)
 ```
 
 **Rust**

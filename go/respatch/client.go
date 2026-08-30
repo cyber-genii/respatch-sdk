@@ -1,4 +1,4 @@
-package transmit
+package respatch
 
 import (
 	"bytes"
@@ -6,8 +6,18 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"time"
 )
+
+func firstEnv(names ...string) string {
+	for _, name := range names {
+		if value := os.Getenv(name); value != "" {
+			return value
+		}
+	}
+	return ""
+}
 
 type Client struct {
 	BaseURL    string
@@ -28,8 +38,14 @@ type Options struct {
 	BaseURL     string // Optional override
 }
 
-// NewClient creates a new Transmit API Client
+// NewClient creates a new Respatch API client.
+//
+// When Options.APIKey is empty the key is read from RESPATCH_API_KEY, falling back to
+// the legacy TRANSMIT_API_KEY, matching the Node and Python SDKs.
 func NewClient(options Options) (*Client, error) {
+	if options.APIKey == "" {
+		options.APIKey = firstEnv("RESPATCH_API_KEY", "TRANSMIT_API_KEY")
+	}
 	if options.APIKey == "" {
 		return nil, fmt.Errorf("API Key is required to initialize the Respatch SDK")
 	}
@@ -95,7 +111,7 @@ func (c *Client) sendRequest(method, path string, body interface{}) ([]byte, err
 	}
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		return nil, fmt.Errorf("transmit api error: %d - %s", resp.StatusCode, string(respBody))
+		return nil, fmt.Errorf("respatch api error: %d - %s", resp.StatusCode, string(respBody))
 	}
 
 	return unwrapData(respBody), nil
