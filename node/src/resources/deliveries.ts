@@ -1,4 +1,4 @@
-import { RespatchClient } from '../client';
+import { RespatchClient, RequestOptions } from '../client';
 import { unwrapList } from '../response';
 import {
   CalculateOrderFareRequest,
@@ -16,8 +16,15 @@ export class Deliveries {
     this.client = client;
   }
 
-  async create(data: CreateDeliveryOrderRequest): Promise<CreateDeliveryOrderResponse> {
-    return this.client.post<CreateDeliveryOrderResponse>('/api/v1/delivery-orders', data);
+  async create(
+    data: CreateDeliveryOrderRequest,
+    options?: RequestOptions,
+  ): Promise<CreateDeliveryOrderResponse> {
+    return this.client.post<CreateDeliveryOrderResponse>(
+      '/api/v1/delivery-orders',
+      data,
+      options,
+    );
   }
 
   async list(params?: Record<string, unknown>): Promise<CreateDeliveryOrderResponse[]> {

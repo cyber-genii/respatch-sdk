@@ -1,4 +1,4 @@
-import { RespatchClient } from '../client';
+import { RespatchClient, RequestOptions } from '../client';
 import { unwrapList } from '../response';
 import {
   BookFromQuoteParams,
@@ -8,6 +8,8 @@ import {
   GetQuoteRequest,
   GetQuoteResponse,
 } from '../types/deliveryOrders';
+
+export interface OrderRequestOptions extends RequestOptions {}
 
 export class Orders {
   private client: RespatchClient;
@@ -26,23 +28,36 @@ export class Orders {
     return this.client.post<GetQuoteResponse>('/api/v1/delivery-orders/calculate-fare', data);
   }
 
-  async create(data: CreateDeliveryOrderRequest): Promise<CreateDeliveryOrderResponse> {
-    return this.client.post<CreateDeliveryOrderResponse>('/api/v1/delivery-orders', data);
+  async create(
+    data: CreateDeliveryOrderRequest,
+    options?: OrderRequestOptions,
+  ): Promise<CreateDeliveryOrderResponse> {
+    return this.client.post<CreateDeliveryOrderResponse>(
+      '/api/v1/delivery-orders',
+      data,
+      options,
+    );
   }
 
   /**
    * Create an order from a prior quote (single HTTP call to Create Order).
    * Obtain `quoteId` first via `quote()`.
    */
-  async bookFromQuote(params: BookFromQuoteParams): Promise<CreateDeliveryOrderResponse> {
+  async bookFromQuote(
+    params: BookFromQuoteParams,
+    options?: OrderRequestOptions,
+  ): Promise<CreateDeliveryOrderResponse> {
     const { quoteId, pickup, dropoff, packages, ...rest } = params;
-    return this.create({
-      quote_id: quoteId,
-      pickup,
-      dropoff,
-      packages,
-      ...rest,
-    });
+    return this.create(
+      {
+        quote_id: quoteId,
+        pickup,
+        dropoff,
+        packages,
+        ...rest,
+      },
+      options,
+    );
   }
 
   async list(params?: Record<string, unknown>): Promise<CreateDeliveryOrderResponse[]> {

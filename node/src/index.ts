@@ -44,3 +44,4 @@ export {
   RESPATCH_PRODUCTION_URL,
   RESPATCH_SANDBOX_URL,
 } from './client';
+export type { RequestOptions } from './client';
