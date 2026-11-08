@@ -17,6 +17,37 @@ export function verifyWebhookSignature(
   if (!signatureHeader || !secret) return false;
 
   const body = typeof payload === 'string' ? payload : payload.toString('utf8');
+
+  // Support standard t={timestamp},v1={hmac} signature format
+  if (signatureHeader.includes('t=') && signatureHeader.includes('v1=')) {
+    const parts = signatureHeader.split(',');
+    let timestamp = '';
+    let v1 = '';
+    for (const p of parts) {
+      const idx = p.indexOf('=');
+      if (idx !== -1) {
+        const k = p.slice(0, idx).trim();
+        const v = p.slice(idx + 1).trim();
+        if (k === 't') timestamp = v;
+        if (k === 'v1') v1 = v;
+      }
+    }
+    if (timestamp && v1) {
+      const expected = createHmac('sha256', secret)
+        .update(`${timestamp}.${body}`, 'utf8')
+        .digest('hex');
+      try {
+        const a = Buffer.from(expected, 'hex');
+        const b = Buffer.from(v1, 'hex');
+        if (a.length === b.length && timingSafeEqual(a, b)) {
+          return true;
+        }
+      } catch {
+        // Fall back to plain signature check
+      }
+    }
+  }
+
   const expected = createHmac('sha256', secret).update(body, 'utf8').digest('hex');
   const provided = signatureHeader.replace(/^sha256=/i, '').trim();
 

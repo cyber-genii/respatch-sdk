@@ -66,10 +66,12 @@ export class RespatchClient {
     config: AxiosRequestConfig,
   ): Promise<AxiosResponse<T>> {
     let backoff = INITIAL_BACKOFF_MS;
+    let lastError: unknown;
     for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
       try {
         return await this.httpClient.request<T>(config);
       } catch (error) {
+        lastError = error;
         const axiosError = error as AxiosError;
         const status = axiosError.response?.status;
         const retryable =
@@ -81,7 +83,7 @@ export class RespatchClient {
         backoff *= 2;
       }
     }
-    throw new Error('Request failed after retries');
+    throw lastError ?? new Error('Request failed after retries');
   }
 
   private mergeHeaders(options?: RequestOptions): Record<string, string> | undefined {
