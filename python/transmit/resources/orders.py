@@ -101,3 +101,15 @@ class Orders:
 
     def cancel(self, order_id: str) -> None:
         self._client.post(f"/api/v1/delivery-orders/{order_id}/cancel")
+
+    def generate_auth_code(self, order_id: str, action: str = "pickup") -> Dict[str, Any]:
+        return self._client.post(
+            f"/api/v1/delivery-orders/{order_id}/auth-code/generate",
+            json={"action": action},
+        )
+
+    def get_active_auth_code(self, order_id: str, action: str = "pickup") -> Dict[str, Any]:
+        return self._client.get(
+            f"/api/v1/delivery-orders/{order_id}/auth-code/active",
+            params={"action": action},
+        )

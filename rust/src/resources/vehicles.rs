@@ -1,4 +1,4 @@
-use crate::client::{Client, TransmitError};
+use crate::client::{Client, RespatchError};
 use serde_json::Value;
 
 pub struct Vehicles<'a> {
@@ -10,7 +10,11 @@ impl<'a> Vehicles<'a> {
         Self { client }
     }
 
-    pub async fn get_types(&self) -> Result<Value, TransmitError> {
+    pub async fn get_types(&self) -> Result<Value, RespatchError> {
         self.client.get("/api/v1/vehicles/types").await
+    }
+
+    pub async fn truck_specialties(&self) -> Result<Value, RespatchError> {
+        self.client.get("/api/v1/vehicles/truck-specialties").await
     }
 }

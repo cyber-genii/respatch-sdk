@@ -10,4 +10,8 @@ export class Vehicles {
   async getTypes(): Promise<any[]> {
     return this.client.get<any[]>('/api/v1/vehicles/types');
   }
+
+  async truckSpecialties(): Promise<any[]> {
+    return this.client.get<any[]>('/api/v1/vehicles/truck-specialties');
+  }
 }

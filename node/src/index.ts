@@ -35,8 +35,10 @@ export * from './types/deliveryOrders';
 export {
   verifyWebhookSignature,
   signWebhookPayload,
+  signWebhookHeader,
   getWebhookSignatureHeader,
   RESPATCH_SIGNATURE_HEADER,
+  DEFAULT_WEBHOOK_TOLERANCE_SECONDS,
 } from './webhook';
 export {
   RespatchClient,

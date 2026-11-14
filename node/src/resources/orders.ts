@@ -77,4 +77,18 @@ export class Orders {
   async cancel(orderId: string): Promise<void> {
     await this.client.post(`/api/v1/delivery-orders/${orderId}/cancel`);
   }
+
+  async generateAuthCode(
+    orderId: string,
+    action: 'pickup' | 'dropoff' = 'pickup',
+  ): Promise<unknown> {
+    return this.client.post(`/api/v1/delivery-orders/${orderId}/auth-code/generate`, { action });
+  }
+
+  async getActiveAuthCode(
+    orderId: string,
+    action: 'pickup' | 'dropoff' = 'pickup',
+  ): Promise<unknown> {
+    return this.client.get(`/api/v1/delivery-orders/${orderId}/auth-code/active`, { action });
+  }
 }

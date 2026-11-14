@@ -83,9 +83,23 @@ func VerifyWebhookSignature(payload []byte, signatureHeader, secret string) bool
 	return respatch.VerifyWebhookSignature(payload, signatureHeader, secret)
 }
 
+// VerifyWebhookSignatureWithTolerance reports whether a webhook payload matches its signature with a custom timestamp tolerance.
+//
+// Deprecated: use respatch.VerifyWebhookSignatureWithTolerance.
+func VerifyWebhookSignatureWithTolerance(payload []byte, signatureHeader, secret string, toleranceSeconds int64) bool {
+	return respatch.VerifyWebhookSignatureWithTolerance(payload, signatureHeader, secret, toleranceSeconds)
+}
+
 // SignWebhookPayload produces the signature header value for a payload.
 //
 // Deprecated: use respatch.SignWebhookPayload.
 func SignWebhookPayload(payload []byte, secret string) string {
 	return respatch.SignWebhookPayload(payload, secret)
+}
+
+// SignWebhookHeader produces a `t=<timestamp>,v1=<hex>` signature header value.
+//
+// Deprecated: use respatch.SignWebhookHeader.
+func SignWebhookHeader(payload []byte, secret string, timestamp int64) string {
+	return respatch.SignWebhookHeader(payload, secret, timestamp)
 }

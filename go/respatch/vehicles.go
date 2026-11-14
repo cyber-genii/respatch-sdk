@@ -16,3 +16,14 @@ func (s *VehiclesService) GetTypes() ([]map[string]interface{}, error) {
 	err = json.Unmarshal(resp, &result)
 	return result, err
 }
+
+func (s *VehiclesService) TruckSpecialties() ([]map[string]interface{}, error) {
+	resp, err := s.client.sendRequest("GET", "/api/v1/vehicles/truck-specialties", nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var result []map[string]interface{}
+	err = json.Unmarshal(resp, &result)
+	return result, err
+}

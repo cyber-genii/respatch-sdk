@@ -1,4 +1,4 @@
-use crate::client::{Client, TransmitError};
+use crate::client::{Client, RespatchError};
 use crate::types::ApiKeyCreateRequest;
 use serde_json::Value;
 
@@ -11,30 +11,30 @@ impl<'a> ApiKeys<'a> {
         Self { client }
     }
 
-    pub async fn list(&self) -> Result<Vec<Value>, TransmitError> {
+    pub async fn list(&self) -> Result<Vec<Value>, RespatchError> {
         self.client.get("/api/v1/developers/api-keys").await
     }
 
-    pub async fn create(&self, req: &ApiKeyCreateRequest) -> Result<Value, TransmitError> {
+    pub async fn create(&self, req: &ApiKeyCreateRequest) -> Result<Value, RespatchError> {
         self.client.post("/api/v1/developers/api-keys", req).await
     }
 
-    pub async fn retrieve(&self, id: &str) -> Result<Value, TransmitError> {
+    pub async fn retrieve(&self, id: &str) -> Result<Value, RespatchError> {
         let path = format!("/api/v1/developers/api-keys/{}", id);
         self.client.get(&path).await
     }
 
-    pub async fn revoke(&self, id: &str) -> Result<Value, TransmitError> {
+    pub async fn revoke(&self, id: &str) -> Result<Value, RespatchError> {
         let path = format!("/api/v1/developers/api-keys/{}/revoke", id);
         self.client.post(&path, &serde_json::json!({})).await
     }
 
-    pub async fn delete(&self, id: &str) -> Result<Value, TransmitError> {
+    pub async fn delete(&self, id: &str) -> Result<Value, RespatchError> {
         let path = format!("/api/v1/developers/api-keys/{}", id);
         self.client.delete(&path).await
     }
 
-    pub async fn get_usage(&self, id: &str) -> Result<Value, TransmitError> {
+    pub async fn get_usage(&self, id: &str) -> Result<Value, RespatchError> {
         let path = format!("/api/v1/developers/api-keys/{}/usage", id);
         self.client.get(&path).await
     }

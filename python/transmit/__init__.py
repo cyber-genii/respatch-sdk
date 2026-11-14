@@ -23,8 +23,10 @@ class Respatch:
 Transmit = Respatch
 
 from .webhook import (
+    DEFAULT_WEBHOOK_TOLERANCE_SECONDS,
     RESPATCH_SIGNATURE_HEADER,
     get_webhook_signature_header,
+    sign_webhook_header,
     sign_webhook_payload,
     verify_webhook_signature,
 )
@@ -38,6 +40,8 @@ __all__ = [
     "TransmitAPIError",
     "verify_webhook_signature",
     "sign_webhook_payload",
+    "sign_webhook_header",
     "get_webhook_signature_header",
     "RESPATCH_SIGNATURE_HEADER",
+    "DEFAULT_WEBHOOK_TOLERANCE_SECONDS",
 ]

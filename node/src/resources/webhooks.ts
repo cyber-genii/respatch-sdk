@@ -31,4 +31,12 @@ export class Webhooks {
   async getEvents(id: string): Promise<any[]> {
     return this.client.get<any[]>(`/api/v1/developers/webhooks/${id}/events`);
   }
+
+  async dlq(params?: { status?: string; page?: number; per_page?: number }): Promise<any> {
+    return this.client.get<any>('/api/v1/developers/webhook-events', params);
+  }
+
+  async replayDlq(eventId: string): Promise<any> {
+    return this.client.post<any>(`/api/v1/developers/webhook-events/${eventId}/retry`);
+  }
 }

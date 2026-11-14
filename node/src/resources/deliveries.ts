@@ -40,4 +40,18 @@ export class Deliveries {
   async quote(data: CalculateOrderFareRequest): Promise<unknown> {
     return this.client.post('/api/v1/delivery-orders/calculate-fare', data);
   }
+
+  async generateAuthCode(
+    deliveryId: string,
+    action: 'pickup' | 'dropoff' = 'pickup',
+  ): Promise<unknown> {
+    return this.client.post(`/api/v1/delivery-orders/${deliveryId}/auth-code/generate`, { action });
+  }
+
+  async getActiveAuthCode(
+    deliveryId: string,
+    action: 'pickup' | 'dropoff' = 'pickup',
+  ): Promise<unknown> {
+    return this.client.get(`/api/v1/delivery-orders/${deliveryId}/auth-code/active`, { action });
+  }
 }
