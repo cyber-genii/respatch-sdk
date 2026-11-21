@@ -19,4 +19,11 @@ export class Sandbox {
   async clearData(): Promise<void> {
     return this.client.delete<void>('/api/v1/developers/sandbox');
   }
+
+  async simulateEvent(orderId: string, event: string): Promise<any> {
+    return this.client.post<any>(
+      `/api/v1/sandbox/orders/${encodeURIComponent(orderId)}/simulate/${encodeURIComponent(event)}`,
+      {},
+    );
+  }
 }

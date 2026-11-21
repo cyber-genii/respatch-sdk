@@ -21,4 +21,9 @@ impl<'a> Sandbox<'a> {
     pub async fn clear_data(&self) -> Result<Value, RespatchError> {
         self.client.delete("/api/v1/developers/sandbox").await
     }
+
+    pub async fn simulate_event(&self, order_id: &str, event: &str) -> Result<Value, RespatchError> {
+        let path = format!("/api/v1/sandbox/orders/{order_id}/simulate/{event}");
+        self.client.post(&path, &serde_json::json!({})).await
+    }
 }
